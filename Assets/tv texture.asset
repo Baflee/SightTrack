@@ -1,0 +1,582 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a6b9796d1c0440eba061ace5e9dff6, type: 3}
+  m_Name: tv texture
+  m_EditorClassIdentifier: 
+  assetsData:
+  - rid: 1843103199225971006
+  - rid: 1843103199225971012
+  - rid: 1843103199225971018
+  - rid: 1843103199225971024
+  currentMode: TextToImage
+  m_Data:
+  - rid: 1843103199225970998
+  - rid: 1843103199225970999
+  - rid: 1843103199225971000
+  preRefinedArtifact:
+    rid: 1843103199225971024
+  refinedArtifact:
+    rid: 1843103199225971024
+  selectedArtifact:
+    rid: 1843103199225971024
+  m_Operators:
+  - rid: 1843103199225971001
+  - rid: 1843103199225971030
+  - rid: 1843103199225971031
+  - rid: 1843103199225971032
+  - rid: 1843103199225971033
+  m_PreRefineOperators:
+  - rid: 1843103199225971001
+  - rid: 1843103199225971002
+  - rid: 1843103199225971003
+  - rid: 1843103199225971004
+  - rid: 1843103199225971005
+  m_ExportedArtifacts: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 1843103199225970998
+      type: {class: BookmarkManager, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
+      data:
+        m_BookmarkedArtifacts:
+          m_Values: []
+        m_IsFilterEnabled: 0
+    - rid: 1843103199225970999
+      type: {class: MainUI/UISize, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
+      data:
+        m_NodeListWidth: 300
+        m_NodeListRefineWidth: 300
+        m_AssetListRefineWidth: 200
+    - rid: 1843103199225971000
+      type: {class: GenerateButtonData, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
+      data: 
+    - rid: 1843103199225971001
+      type: {class: GenerateOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
+      data:
+        m_OperatorData:
+          type: GenerateOperator
+          key: GenerateOperator
+          version: 1.0.0
+          settings:
+          - TextToImage
+          - 4
+          enabled: 1
+          assembly: 
+          hideable: 0
+          hidden: 0
+          isRefinement: 0
+    - rid: 1843103199225971002
+      type: {class: PromptOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
+      data:
+        m_OperatorData:
+          type: PromptOperator
+          key: PromptOperator
+          version: 0.0.2
+          settings:
+          - tv texture
+          - 
+          enabled: 1
+          assembly: 
+          hideable: 0
+          hidden: 0
+          isRefinement: 0
+    - rid: 1843103199225971003
+      type: {class: LoraOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
+      data:
+        m_OperatorData:
+          type: LoraOperator
+          key: LoraOperator
+          version: 0.0.1
+          settings:
+          - guid1
+          enabled: 0
+          assembly: 
+          hideable: 0
+          hidden: 0
+          isRefinement: 0
+    - rid: 1843103199225971004
+      type: {class: ReferenceOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
+      data:
+        m_OperatorData:
+          type: ReferenceOperator
+          key: ReferenceOperator
+          version: 0.0.2
+          settings:
+          - 
+          - 
+          - 0
+          - 20
+          - 
+          enabled: 1
+          assembly: 
+          hideable: 0
+          hidden: 0
+          isRefinement: 0
+    - rid: 1843103199225971005
+      type: {class: MaskOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
+      data:
+        m_OperatorData:
+          type: MaskOperator
+          key: MaskOperator
+          version: 0.0.1
+          settings:
+          - 
+          - True
+          - 1
+          enabled: 0
+          assembly: 
+          hideable: 0
+          hidden: 0
+          isRefinement: 0
+    - rid: 1843103199225971006
+      type: {class: ImageArtifact, ns: Unity.Muse.Texture, asm: Unity.Muse.Texture}
+      data:
+        mode: TextToImage
+        Guid: d561e59c-dbe4-4aea-b600-dfea4dff3a38
+        BatchRequestIdentifier: 
+        Seed: 210689270
+        m_Operators:
+        - rid: 1843103199225971007
+        - rid: 1843103199225971008
+        - rid: 1843103199225971009
+        - rid: 1843103199225971010
+        - rid: 1843103199225971011
+        history:
+        - rid: 1843103199225971006
+        children: []
+        IsPbrMode: 0
+    - rid: 1843103199225971007
+      type: {class: GenerateOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
+      data:
+        m_OperatorData:
+          type: GenerateOperator
+          key: GenerateOperator
+          version: 1.0.0
+          settings:
+          - TextToImage
+          - 4
+          enabled: 1
+          assembly: 
+          hideable: 0
+          hidden: 0
+          isRefinement: 0
+    - rid: 1843103199225971008
+      type: {class: PromptOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
+      data:
+        m_OperatorData:
+          type: PromptOperator
+          key: PromptOperator
+          version: 0.0.2
+          settings:
+          - tv texture
+          - 
+          enabled: 1
+          assembly: 
+          hideable: 0
+          hidden: 0
+          isRefinement: 0
+    - rid: 1843103199225971009
+      type: {class: LoraOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
+      data:
+        m_OperatorData:
+          type: LoraOperator
+          key: LoraOperator
+          version: 0.0.1
+          settings:
+          - guid1
+          enabled: 0
+          assembly: 
+          hideable: 0
+          hidden: 0
+          isRefinement: 0
+    - rid: 1843103199225971010
+      type: {class: ReferenceOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
+      data:
+        m_OperatorData:
+          type: ReferenceOperator
+          key: ReferenceOperator
+          version: 0.0.2
+          settings:
+          - 
+          - 
+          - 0
+          - 20
+          - 
+          enabled: 1
+          assembly: 
+          hideable: 0
+          hidden: 0
+          isRefinement: 0
+    - rid: 1843103199225971011
+      type: {class: MaskOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
+      data:
+        m_OperatorData:
+          type: MaskOperator
+          key: MaskOperator
+          version: 0.0.1
+          settings:
+          - 
+          - True
+          - 1
+          enabled: 0
+          assembly: 
+          hideable: 0
+          hidden: 0
+          isRefinement: 0
+    - rid: 1843103199225971012
+      type: {class: ImageArtifact, ns: Unity.Muse.Texture, asm: Unity.Muse.Texture}
+      data:
+        mode: TextToImage
+        Guid: 352118fc-eeee-41e7-9662-8d99c4654d0d
+        BatchRequestIdentifier: 
+        Seed: 2003597209
+        m_Operators:
+        - rid: 1843103199225971013
+        - rid: 1843103199225971014
+        - rid: 1843103199225971015
+        - rid: 1843103199225971016
+        - rid: 1843103199225971017
+        history:
+        - rid: 1843103199225971012
+        children: []
+        IsPbrMode: 0
+    - rid: 1843103199225971013
+      type: {class: GenerateOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
+      data:
+        m_OperatorData:
+          type: GenerateOperator
+          key: GenerateOperator
+          version: 1.0.0
+          settings:
+          - TextToImage
+          - 4
+          enabled: 1
+          assembly: 
+          hideable: 0
+          hidden: 0
+          isRefinement: 0
+    - rid: 1843103199225971014
+      type: {class: PromptOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
+      data:
+        m_OperatorData:
+          type: PromptOperator
+          key: PromptOperator
+          version: 0.0.2
+          settings:
+          - tv texture
+          - 
+          enabled: 1
+          assembly: 
+          hideable: 0
+          hidden: 0
+          isRefinement: 0
+    - rid: 1843103199225971015
+      type: {class: LoraOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
+      data:
+        m_OperatorData:
+          type: LoraOperator
+          key: LoraOperator
+          version: 0.0.1
+          settings:
+          - guid1
+          enabled: 0
+          assembly: 
+          hideable: 0
+          hidden: 0
+          isRefinement: 0
+    - rid: 1843103199225971016
+      type: {class: ReferenceOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
+      data:
+        m_OperatorData:
+          type: ReferenceOperator
+          key: ReferenceOperator
+          version: 0.0.2
+          settings:
+          - 
+          - 
+          - 0
+          - 20
+          - 
+          enabled: 1
+          assembly: 
+          hideable: 0
+          hidden: 0
+          isRefinement: 0
+    - rid: 1843103199225971017
+      type: {class: MaskOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
+      data:
+        m_OperatorData:
+          type: MaskOperator
+          key: MaskOperator
+          version: 0.0.1
+          settings:
+          - 
+          - True
+          - 1
+          enabled: 0
+          assembly: 
+          hideable: 0
+          hidden: 0
+          isRefinement: 0
+    - rid: 1843103199225971018
+      type: {class: ImageArtifact, ns: Unity.Muse.Texture, asm: Unity.Muse.Texture}
+      data:
+        mode: TextToImage
+        Guid: 52812e43-2c6a-4840-9460-816e60841b6a
+        BatchRequestIdentifier: 
+        Seed: 2842158976
+        m_Operators:
+        - rid: 1843103199225971019
+        - rid: 1843103199225971020
+        - rid: 1843103199225971021
+        - rid: 1843103199225971022
+        - rid: 1843103199225971023
+        history:
+        - rid: 1843103199225971018
+        children: []
+        IsPbrMode: 0
+    - rid: 1843103199225971019
+      type: {class: GenerateOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
+      data:
+        m_OperatorData:
+          type: GenerateOperator
+          key: GenerateOperator
+          version: 1.0.0
+          settings:
+          - TextToImage
+          - 4
+          enabled: 1
+          assembly: 
+          hideable: 0
+          hidden: 0
+          isRefinement: 0
+    - rid: 1843103199225971020
+      type: {class: PromptOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
+      data:
+        m_OperatorData:
+          type: PromptOperator
+          key: PromptOperator
+          version: 0.0.2
+          settings:
+          - tv texture
+          - 
+          enabled: 1
+          assembly: 
+          hideable: 0
+          hidden: 0
+          isRefinement: 0
+    - rid: 1843103199225971021
+      type: {class: LoraOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
+      data:
+        m_OperatorData:
+          type: LoraOperator
+          key: LoraOperator
+          version: 0.0.1
+          settings:
+          - guid1
+          enabled: 0
+          assembly: 
+          hideable: 0
+          hidden: 0
+          isRefinement: 0
+    - rid: 1843103199225971022
+      type: {class: ReferenceOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
+      data:
+        m_OperatorData:
+          type: ReferenceOperator
+          key: ReferenceOperator
+          version: 0.0.2
+          settings:
+          - 
+          - 
+          - 0
+          - 20
+          - 
+          enabled: 1
+          assembly: 
+          hideable: 0
+          hidden: 0
+          isRefinement: 0
+    - rid: 1843103199225971023
+      type: {class: MaskOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
+      data:
+        m_OperatorData:
+          type: MaskOperator
+          key: MaskOperator
+          version: 0.0.1
+          settings:
+          - 
+          - True
+          - 1
+          enabled: 0
+          assembly: 
+          hideable: 0
+          hidden: 0
+          isRefinement: 0
+    - rid: 1843103199225971024
+      type: {class: ImageArtifact, ns: Unity.Muse.Texture, asm: Unity.Muse.Texture}
+      data:
+        mode: TextToImage
+        Guid: b99ee1d5-59bc-47ae-813d-2a5420c04ef6
+        BatchRequestIdentifier: 
+        Seed: 4099012981
+        m_Operators:
+        - rid: 1843103199225971025
+        - rid: 1843103199225971026
+        - rid: 1843103199225971027
+        - rid: 1843103199225971028
+        - rid: 1843103199225971029
+        history:
+        - rid: 1843103199225971024
+        children: []
+        IsPbrMode: 0
+    - rid: 1843103199225971025
+      type: {class: GenerateOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
+      data:
+        m_OperatorData:
+          type: GenerateOperator
+          key: GenerateOperator
+          version: 1.0.0
+          settings:
+          - TextToImage
+          - 4
+          enabled: 1
+          assembly: 
+          hideable: 0
+          hidden: 0
+          isRefinement: 0
+    - rid: 1843103199225971026
+      type: {class: PromptOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
+      data:
+        m_OperatorData:
+          type: PromptOperator
+          key: PromptOperator
+          version: 0.0.2
+          settings:
+          - tv texture
+          - 
+          enabled: 1
+          assembly: 
+          hideable: 0
+          hidden: 0
+          isRefinement: 0
+    - rid: 1843103199225971027
+      type: {class: LoraOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
+      data:
+        m_OperatorData:
+          type: LoraOperator
+          key: LoraOperator
+          version: 0.0.1
+          settings:
+          - guid1
+          enabled: 0
+          assembly: 
+          hideable: 0
+          hidden: 0
+          isRefinement: 0
+    - rid: 1843103199225971028
+      type: {class: ReferenceOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
+      data:
+        m_OperatorData:
+          type: ReferenceOperator
+          key: ReferenceOperator
+          version: 0.0.2
+          settings:
+          - 
+          - 
+          - 0
+          - 20
+          - 
+          enabled: 1
+          assembly: 
+          hideable: 0
+          hidden: 0
+          isRefinement: 0
+    - rid: 1843103199225971029
+      type: {class: MaskOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
+      data:
+        m_OperatorData:
+          type: MaskOperator
+          key: MaskOperator
+          version: 0.0.1
+          settings:
+          - 
+          - True
+          - 1
+          enabled: 0
+          assembly: 
+          hideable: 0
+          hidden: 0
+          isRefinement: 0
+    - rid: 1843103199225971030
+      type: {class: PromptOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
+      data:
+        m_OperatorData:
+          type: PromptOperator
+          key: PromptOperator
+          version: 0.0.2
+          settings:
+          - tv texture
+          - 
+          enabled: 1
+          assembly: 
+          hideable: 0
+          hidden: 0
+          isRefinement: 0
+    - rid: 1843103199225971031
+      type: {class: LoraOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
+      data:
+        m_OperatorData:
+          type: LoraOperator
+          key: LoraOperator
+          version: 0.0.1
+          settings:
+          - guid1
+          enabled: 0
+          assembly: 
+          hideable: 0
+          hidden: 0
+          isRefinement: 0
+    - rid: 1843103199225971032
+      type: {class: ReferenceOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
+      data:
+        m_OperatorData:
+          type: ReferenceOperator
+          key: ReferenceOperator
+          version: 0.0.2
+          settings:
+          - 
+          - 
+          - 0
+          - 20
+          - 
+          enabled: 1
+          assembly: 
+          hideable: 0
+          hidden: 0
+          isRefinement: 0
+    - rid: 1843103199225971033
+      type: {class: MaskOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
+      data:
+        m_OperatorData:
+          type: MaskOperator
+          key: MaskOperator
+          version: 0.0.1
+          settings:
+          - 
+          - True
+          - 1
+          enabled: 0
+          assembly: 
+          hideable: 0
+          hidden: 0
+          isRefinement: 0
