@@ -5,43 +5,60 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 5f;
     public float crouchSpeed = 2.5f;
     public float jumpForce = 5f;
+    public float gravity = -9.81f;
 
-    private Rigidbody rb;
+    private CharacterController characterController;
+    private Vector3 velocity;
     private bool isGrounded;
     private bool isCrouching;
 
-    private CapsuleCollider playerCollider;
-    private float originalHeight;
     public float crouchHeight = 1f;
+    private float originalHeight;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        playerCollider = GetComponent<CapsuleCollider>();
-        originalHeight = playerCollider.height;
+        characterController = GetComponent<CharacterController>();
+        originalHeight = characterController.height;
     }
 
     void Update()
     {
+        // Vérifier si le joueur est au sol
+        CheckGrounded();
+
+        if (isGrounded && velocity.y < 0)
+        {
+            velocity.y = -2f; // Petite force pour rester au sol
+        }
+
         HandleMovement();
         HandleCrouch();
+        HandleJump();
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            HandleJump();
-        }
+        // Appliquer la gravité
+        velocity.y += gravity * Time.deltaTime;
+
+        // Appliquer le mouvement vertical
+        characterController.Move(velocity * Time.deltaTime);
+    }
+
+    void CheckGrounded()
+    {
+        // Utiliser isGrounded du CharacterController et un Raycast comme fallback
+        isGrounded = characterController.isGrounded ||
+                     Physics.Raycast(transform.position, Vector3.down, characterController.height / 2 + 0.1f);
     }
 
     void HandleMovement()
     {
-        float moveX = Input.GetAxis("Horizontal"); // Q/D or A/D
-        float moveZ = Input.GetAxis("Vertical");   // Z/S or W/S
+        float moveX = Input.GetAxis("Horizontal");
+        float moveZ = Input.GetAxis("Vertical");
 
-        // Adjust movement speed if crouching
         float currentSpeed = isCrouching ? crouchSpeed : moveSpeed;
 
-        Vector3 movement = (transform.right * moveX + transform.forward * moveZ).normalized * currentSpeed * Time.deltaTime;
-        transform.Translate(movement, Space.World);
+        Vector3 move = transform.right * moveX + transform.forward * moveZ;
+
+        characterController.Move(move * currentSpeed * Time.deltaTime);
     }
 
     void HandleCrouch()
@@ -61,38 +78,20 @@ public class PlayerMovement : MonoBehaviour
 
     void HandleJump()
     {
-        if (isGrounded && !isCrouching)
+        if (isGrounded && Input.GetKeyDown(KeyCode.Space) && !isCrouching)
         {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            isGrounded = false;
+            velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
         }
     }
 
     void ChangePlayerHeight(float height)
     {
-        // Adjust collider height
-        float heightDifference = playerCollider.height - height;
-        playerCollider.height = height;
-
-        // Adjust position to keep feet on the ground
-        Vector3 newPosition = transform.position;
-        newPosition.y -= heightDifference / 2; // Adjust only half of the height difference
-        transform.position = newPosition;
+        characterController.height = height;
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnDrawGizmos()
     {
-        if (collision.contacts.Length > 0 && collision.gameObject.layer == LayerMask.NameToLayer("Default"))
-        {
-            isGrounded = true;
-        }
-    }
-
-    void OnCollisionExit(Collision collision)
-    {
-        if (collision.contacts.Length > 0 && collision.gameObject.layer == LayerMask.NameToLayer("Default"))
-        {
-            isGrounded = false;
-        }
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * (characterController.height / 2 + 0.1f));
     }
 }
