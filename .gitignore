@@ -1,0 +1,85 @@
+# Unity generated files
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+
+# Visual Studio/JetBrains Rider files
+.vscode/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.opendb
+*.VC.db
+
+# Unity specific files
+# Crash reports
+sysinfo.txt
+
+# Builds
+*.apk
+*.aab
+*.exe
+*.app
+*.msi
+*.dmg
+*.ipa
+
+# Unity Cache files
+/Assets/AssetStoreTools*
+
+# Asset meta data should only be ignored when the corresponding asset is ignored
+*.asset.meta
+*.unity.meta
+
+# Prevent ignoring ProjectSettings/EditorSettings.asset
+!ProjectSettings/EditorSettings.asset
+
+# Exclude auto-generated metadata
+*.meta
+
+# Shader cache
+*.cginc.meta
+*.shader.meta
+
+# Auto-generated UIElements
+*.uss.meta
+*.uxml.meta
+
+# VS Code specific files
+.vscode/
+
+# Rider specific files
+.idea/
+
+# ScriptableObject binary data
+*.asset
+
+# Ignore the TextMeshPro auto-generated folder
+TextMesh Pro/
+
+# Logs
+*.log
+
+# Ignore everything in StreamingAssets/ except .gitignore
+StreamingAssets/*
+!StreamingAssets/.gitignore
+
+# Ignore crash dumps
+*.stacktrace
+*.crash
+*.mdmp
+
+# Ignore user settings
+UserSettings/
