@@ -1387,6 +1387,14 @@ PrefabInstance:
       propertyPath: field of view
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 4929144535953180106, guid: 97396b320b85f8048bc230cfefceabcc, type: 3}
+      propertyPath: near clip plane
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5702211094938594343, guid: 97396b320b85f8048bc230cfefceabcc, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5702211094938594343, guid: 97396b320b85f8048bc230cfefceabcc, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -1405,6 +1413,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5702211094938594343, guid: 97396b320b85f8048bc230cfefceabcc, type: 3}
       propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5702211094938594343, guid: 97396b320b85f8048bc230cfefceabcc, type: 3}
+      propertyPath: m_UseSpriteMesh
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5965494855584507910, guid: 97396b320b85f8048bc230cfefceabcc, type: 3}
@@ -1437,7 +1449,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7356610280071472617, guid: 97396b320b85f8048bc230cfefceabcc, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 1293.8682
+      value: 1002.041
       objectReference: {fileID: 0}
     - target: {fileID: 7356610280071472617, guid: 97396b320b85f8048bc230cfefceabcc, type: 3}
       propertyPath: m_LocalScale.x
