@@ -10,56 +10,54 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31a6b9796d1c0440eba061ace5e9dff6, type: 3}
-  m_Name: tv texture
+  m_Name: 'television texture, contour gris et ecran '
   m_EditorClassIdentifier: 
   assetsData:
-  - rid: 1843103199225971006
-  - rid: 1843103199225971012
-  - rid: 1843103199225971018
-  - rid: 1843103199225971024
+  - rid: 1843103199225971050
+  - rid: 1843103199225971056
+  - rid: 1843103199225971062
+  - rid: 1843103199225971068
+  - rid: 1843103199225971074
   currentMode: TextToImage
   m_Data:
-  - rid: 1843103199225970998
-  - rid: 1843103199225970999
-  - rid: 1843103199225971000
+  - rid: 1843103199225971042
+  - rid: 1843103199225971043
+  - rid: 1843103199225971044
   preRefinedArtifact:
-    rid: 1843103199225971024
+    rid: -2
   refinedArtifact:
-    rid: 1843103199225971024
+    rid: -2
   selectedArtifact:
-    rid: 1843103199225971024
+    rid: 1843103199225971050
   m_Operators:
-  - rid: 1843103199225971001
-  - rid: 1843103199225971030
-  - rid: 1843103199225971031
-  - rid: 1843103199225971032
-  - rid: 1843103199225971033
-  m_PreRefineOperators:
-  - rid: 1843103199225971001
-  - rid: 1843103199225971002
-  - rid: 1843103199225971003
-  - rid: 1843103199225971004
-  - rid: 1843103199225971005
+  - rid: 1843103199225971045
+  - rid: 1843103199225971046
+  - rid: 1843103199225971047
+  - rid: 1843103199225971048
+  - rid: 1843103199225971049
+  m_PreRefineOperators: []
   m_ExportedArtifacts: []
   references:
     version: 2
     RefIds:
-    - rid: 1843103199225970998
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 1843103199225971042
       type: {class: BookmarkManager, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
       data:
         m_BookmarkedArtifacts:
           m_Values: []
         m_IsFilterEnabled: 0
-    - rid: 1843103199225970999
+    - rid: 1843103199225971043
       type: {class: MainUI/UISize, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
       data:
         m_NodeListWidth: 300
         m_NodeListRefineWidth: 300
         m_AssetListRefineWidth: 200
-    - rid: 1843103199225971000
+    - rid: 1843103199225971044
       type: {class: GenerateButtonData, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
       data: 
-    - rid: 1843103199225971001
+    - rid: 1843103199225971045
       type: {class: GenerateOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
       data:
         m_OperatorData:
@@ -68,13 +66,13 @@ MonoBehaviour:
           version: 1.0.0
           settings:
           - TextToImage
-          - 4
+          - 5
           enabled: 1
           assembly: 
           hideable: 0
           hidden: 0
           isRefinement: 0
-    - rid: 1843103199225971002
+    - rid: 1843103199225971046
       type: {class: PromptOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
       data:
         m_OperatorData:
@@ -82,14 +80,14 @@ MonoBehaviour:
           key: PromptOperator
           version: 0.0.2
           settings:
-          - tv texture
+          - 'television texture, contour gris et ecran '
           - 
           enabled: 1
           assembly: 
           hideable: 0
           hidden: 0
           isRefinement: 0
-    - rid: 1843103199225971003
+    - rid: 1843103199225971047
       type: {class: LoraOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
       data:
         m_OperatorData:
@@ -103,7 +101,7 @@ MonoBehaviour:
           hideable: 0
           hidden: 0
           isRefinement: 0
-    - rid: 1843103199225971004
+    - rid: 1843103199225971048
       type: {class: ReferenceOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
       data:
         m_OperatorData:
@@ -121,7 +119,7 @@ MonoBehaviour:
           hideable: 0
           hidden: 0
           isRefinement: 0
-    - rid: 1843103199225971005
+    - rid: 1843103199225971049
       type: {class: MaskOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
       data:
         m_OperatorData:
@@ -137,24 +135,24 @@ MonoBehaviour:
           hideable: 0
           hidden: 0
           isRefinement: 0
-    - rid: 1843103199225971006
+    - rid: 1843103199225971050
       type: {class: ImageArtifact, ns: Unity.Muse.Texture, asm: Unity.Muse.Texture}
       data:
         mode: TextToImage
-        Guid: d561e59c-dbe4-4aea-b600-dfea4dff3a38
+        Guid: 4b510aa8-1198-43ea-abf5-09894e511810
         BatchRequestIdentifier: 
-        Seed: 210689270
+        Seed: 1551205361
         m_Operators:
-        - rid: 1843103199225971007
-        - rid: 1843103199225971008
-        - rid: 1843103199225971009
-        - rid: 1843103199225971010
-        - rid: 1843103199225971011
+        - rid: 1843103199225971051
+        - rid: 1843103199225971052
+        - rid: 1843103199225971053
+        - rid: 1843103199225971054
+        - rid: 1843103199225971055
         history:
-        - rid: 1843103199225971006
+        - rid: 1843103199225971050
         children: []
-        IsPbrMode: 0
-    - rid: 1843103199225971007
+        IsPbrMode: 1
+    - rid: 1843103199225971051
       type: {class: GenerateOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
       data:
         m_OperatorData:
@@ -163,13 +161,13 @@ MonoBehaviour:
           version: 1.0.0
           settings:
           - TextToImage
-          - 4
+          - 5
           enabled: 1
           assembly: 
           hideable: 0
           hidden: 0
           isRefinement: 0
-    - rid: 1843103199225971008
+    - rid: 1843103199225971052
       type: {class: PromptOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
       data:
         m_OperatorData:
@@ -177,14 +175,14 @@ MonoBehaviour:
           key: PromptOperator
           version: 0.0.2
           settings:
-          - tv texture
+          - 'television texture, contour gris et ecran '
           - 
           enabled: 1
           assembly: 
           hideable: 0
           hidden: 0
           isRefinement: 0
-    - rid: 1843103199225971009
+    - rid: 1843103199225971053
       type: {class: LoraOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
       data:
         m_OperatorData:
@@ -198,7 +196,7 @@ MonoBehaviour:
           hideable: 0
           hidden: 0
           isRefinement: 0
-    - rid: 1843103199225971010
+    - rid: 1843103199225971054
       type: {class: ReferenceOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
       data:
         m_OperatorData:
@@ -216,7 +214,7 @@ MonoBehaviour:
           hideable: 0
           hidden: 0
           isRefinement: 0
-    - rid: 1843103199225971011
+    - rid: 1843103199225971055
       type: {class: MaskOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
       data:
         m_OperatorData:
@@ -232,24 +230,24 @@ MonoBehaviour:
           hideable: 0
           hidden: 0
           isRefinement: 0
-    - rid: 1843103199225971012
+    - rid: 1843103199225971056
       type: {class: ImageArtifact, ns: Unity.Muse.Texture, asm: Unity.Muse.Texture}
       data:
         mode: TextToImage
-        Guid: 352118fc-eeee-41e7-9662-8d99c4654d0d
+        Guid: 4a2a646b-2a41-4c40-857d-89cf4ff09dcf
         BatchRequestIdentifier: 
-        Seed: 2003597209
+        Seed: 22229843
         m_Operators:
-        - rid: 1843103199225971013
-        - rid: 1843103199225971014
-        - rid: 1843103199225971015
-        - rid: 1843103199225971016
-        - rid: 1843103199225971017
+        - rid: 1843103199225971057
+        - rid: 1843103199225971058
+        - rid: 1843103199225971059
+        - rid: 1843103199225971060
+        - rid: 1843103199225971061
         history:
-        - rid: 1843103199225971012
+        - rid: 1843103199225971056
         children: []
         IsPbrMode: 0
-    - rid: 1843103199225971013
+    - rid: 1843103199225971057
       type: {class: GenerateOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
       data:
         m_OperatorData:
@@ -258,13 +256,13 @@ MonoBehaviour:
           version: 1.0.0
           settings:
           - TextToImage
-          - 4
+          - 5
           enabled: 1
           assembly: 
           hideable: 0
           hidden: 0
           isRefinement: 0
-    - rid: 1843103199225971014
+    - rid: 1843103199225971058
       type: {class: PromptOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
       data:
         m_OperatorData:
@@ -272,14 +270,14 @@ MonoBehaviour:
           key: PromptOperator
           version: 0.0.2
           settings:
-          - tv texture
+          - 'television texture, contour gris et ecran '
           - 
           enabled: 1
           assembly: 
           hideable: 0
           hidden: 0
           isRefinement: 0
-    - rid: 1843103199225971015
+    - rid: 1843103199225971059
       type: {class: LoraOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
       data:
         m_OperatorData:
@@ -293,7 +291,7 @@ MonoBehaviour:
           hideable: 0
           hidden: 0
           isRefinement: 0
-    - rid: 1843103199225971016
+    - rid: 1843103199225971060
       type: {class: ReferenceOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
       data:
         m_OperatorData:
@@ -311,7 +309,7 @@ MonoBehaviour:
           hideable: 0
           hidden: 0
           isRefinement: 0
-    - rid: 1843103199225971017
+    - rid: 1843103199225971061
       type: {class: MaskOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
       data:
         m_OperatorData:
@@ -327,24 +325,24 @@ MonoBehaviour:
           hideable: 0
           hidden: 0
           isRefinement: 0
-    - rid: 1843103199225971018
+    - rid: 1843103199225971062
       type: {class: ImageArtifact, ns: Unity.Muse.Texture, asm: Unity.Muse.Texture}
       data:
         mode: TextToImage
-        Guid: 52812e43-2c6a-4840-9460-816e60841b6a
+        Guid: f822a360-247a-43ea-9687-5a6dbd5aab21
         BatchRequestIdentifier: 
-        Seed: 2842158976
+        Seed: 397332795
         m_Operators:
-        - rid: 1843103199225971019
-        - rid: 1843103199225971020
-        - rid: 1843103199225971021
-        - rid: 1843103199225971022
-        - rid: 1843103199225971023
+        - rid: 1843103199225971063
+        - rid: 1843103199225971064
+        - rid: 1843103199225971065
+        - rid: 1843103199225971066
+        - rid: 1843103199225971067
         history:
-        - rid: 1843103199225971018
+        - rid: 1843103199225971062
         children: []
         IsPbrMode: 0
-    - rid: 1843103199225971019
+    - rid: 1843103199225971063
       type: {class: GenerateOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
       data:
         m_OperatorData:
@@ -353,13 +351,13 @@ MonoBehaviour:
           version: 1.0.0
           settings:
           - TextToImage
-          - 4
+          - 5
           enabled: 1
           assembly: 
           hideable: 0
           hidden: 0
           isRefinement: 0
-    - rid: 1843103199225971020
+    - rid: 1843103199225971064
       type: {class: PromptOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
       data:
         m_OperatorData:
@@ -367,14 +365,14 @@ MonoBehaviour:
           key: PromptOperator
           version: 0.0.2
           settings:
-          - tv texture
+          - 'television texture, contour gris et ecran '
           - 
           enabled: 1
           assembly: 
           hideable: 0
           hidden: 0
           isRefinement: 0
-    - rid: 1843103199225971021
+    - rid: 1843103199225971065
       type: {class: LoraOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
       data:
         m_OperatorData:
@@ -388,7 +386,7 @@ MonoBehaviour:
           hideable: 0
           hidden: 0
           isRefinement: 0
-    - rid: 1843103199225971022
+    - rid: 1843103199225971066
       type: {class: ReferenceOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
       data:
         m_OperatorData:
@@ -406,7 +404,7 @@ MonoBehaviour:
           hideable: 0
           hidden: 0
           isRefinement: 0
-    - rid: 1843103199225971023
+    - rid: 1843103199225971067
       type: {class: MaskOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
       data:
         m_OperatorData:
@@ -422,24 +420,24 @@ MonoBehaviour:
           hideable: 0
           hidden: 0
           isRefinement: 0
-    - rid: 1843103199225971024
+    - rid: 1843103199225971068
       type: {class: ImageArtifact, ns: Unity.Muse.Texture, asm: Unity.Muse.Texture}
       data:
         mode: TextToImage
-        Guid: b99ee1d5-59bc-47ae-813d-2a5420c04ef6
+        Guid: 7adab5ed-0c0e-4b2c-9d49-3c0052590405
         BatchRequestIdentifier: 
-        Seed: 4099012981
+        Seed: 1545714893
         m_Operators:
-        - rid: 1843103199225971025
-        - rid: 1843103199225971026
-        - rid: 1843103199225971027
-        - rid: 1843103199225971028
-        - rid: 1843103199225971029
+        - rid: 1843103199225971069
+        - rid: 1843103199225971070
+        - rid: 1843103199225971071
+        - rid: 1843103199225971072
+        - rid: 1843103199225971073
         history:
-        - rid: 1843103199225971024
+        - rid: 1843103199225971068
         children: []
         IsPbrMode: 0
-    - rid: 1843103199225971025
+    - rid: 1843103199225971069
       type: {class: GenerateOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
       data:
         m_OperatorData:
@@ -448,13 +446,13 @@ MonoBehaviour:
           version: 1.0.0
           settings:
           - TextToImage
-          - 4
+          - 5
           enabled: 1
           assembly: 
           hideable: 0
           hidden: 0
           isRefinement: 0
-    - rid: 1843103199225971026
+    - rid: 1843103199225971070
       type: {class: PromptOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
       data:
         m_OperatorData:
@@ -462,14 +460,14 @@ MonoBehaviour:
           key: PromptOperator
           version: 0.0.2
           settings:
-          - tv texture
+          - 'television texture, contour gris et ecran '
           - 
           enabled: 1
           assembly: 
           hideable: 0
           hidden: 0
           isRefinement: 0
-    - rid: 1843103199225971027
+    - rid: 1843103199225971071
       type: {class: LoraOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
       data:
         m_OperatorData:
@@ -483,7 +481,7 @@ MonoBehaviour:
           hideable: 0
           hidden: 0
           isRefinement: 0
-    - rid: 1843103199225971028
+    - rid: 1843103199225971072
       type: {class: ReferenceOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
       data:
         m_OperatorData:
@@ -501,7 +499,7 @@ MonoBehaviour:
           hideable: 0
           hidden: 0
           isRefinement: 0
-    - rid: 1843103199225971029
+    - rid: 1843103199225971073
       type: {class: MaskOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
       data:
         m_OperatorData:
@@ -517,7 +515,39 @@ MonoBehaviour:
           hideable: 0
           hidden: 0
           isRefinement: 0
-    - rid: 1843103199225971030
+    - rid: 1843103199225971074
+      type: {class: ImageArtifact, ns: Unity.Muse.Texture, asm: Unity.Muse.Texture}
+      data:
+        mode: TextToImage
+        Guid: 8331b345-13f5-4750-a017-b9642efa6aab
+        BatchRequestIdentifier: 
+        Seed: 3979398402
+        m_Operators:
+        - rid: 1843103199225971075
+        - rid: 1843103199225971076
+        - rid: 1843103199225971077
+        - rid: 1843103199225971078
+        - rid: 1843103199225971079
+        history:
+        - rid: 1843103199225971074
+        children: []
+        IsPbrMode: 0
+    - rid: 1843103199225971075
+      type: {class: GenerateOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
+      data:
+        m_OperatorData:
+          type: GenerateOperator
+          key: GenerateOperator
+          version: 1.0.0
+          settings:
+          - TextToImage
+          - 5
+          enabled: 1
+          assembly: 
+          hideable: 0
+          hidden: 0
+          isRefinement: 0
+    - rid: 1843103199225971076
       type: {class: PromptOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
       data:
         m_OperatorData:
@@ -525,14 +555,14 @@ MonoBehaviour:
           key: PromptOperator
           version: 0.0.2
           settings:
-          - tv texture
+          - 'television texture, contour gris et ecran '
           - 
           enabled: 1
           assembly: 
           hideable: 0
           hidden: 0
           isRefinement: 0
-    - rid: 1843103199225971031
+    - rid: 1843103199225971077
       type: {class: LoraOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
       data:
         m_OperatorData:
@@ -546,7 +576,7 @@ MonoBehaviour:
           hideable: 0
           hidden: 0
           isRefinement: 0
-    - rid: 1843103199225971032
+    - rid: 1843103199225971078
       type: {class: ReferenceOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
       data:
         m_OperatorData:
@@ -564,7 +594,7 @@ MonoBehaviour:
           hideable: 0
           hidden: 0
           isRefinement: 0
-    - rid: 1843103199225971033
+    - rid: 1843103199225971079
       type: {class: MaskOperator, ns: Unity.Muse.Common, asm: Unity.Muse.Common}
       data:
         m_OperatorData:
