@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 52260665}
   - component: {fileID: 52260669}
   m_Layer: 0
-  m_Name: yann
+  m_Name: yann pnj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1032,7 +1032,7 @@ GameObject:
   m_Component:
   - component: {fileID: 306000028}
   m_Layer: 0
-  m_Name: yanis papa
+  m_Name: yanis papa pnj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1714,7 +1714,7 @@ GameObject:
   - component: {fileID: 531519787}
   - component: {fileID: 531519786}
   m_Layer: 0
-  m_Name: yeri
+  m_Name: yeri pnj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2759,8 +2759,8 @@ Transform:
   m_GameObject: {fileID: 825275899}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3.214, y: 2.8489082, z: 1}
+  m_LocalPosition: {x: 0.1003, y: 0, z: 0}
+  m_LocalScale: {x: 3.4145536, y: 2.8489082, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 289727290}
@@ -6987,12 +6987,20 @@ PrefabInstance:
       value: Cursor
       objectReference: {fileID: 0}
     - target: {fileID: 2901750997846076955, guid: 97396b320b85f8048bc230cfefceabcc, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 137.465
+      objectReference: {fileID: 0}
+    - target: {fileID: 2901750997846076955, guid: 97396b320b85f8048bc230cfefceabcc, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 180.8659
+      objectReference: {fileID: 0}
+    - target: {fileID: 2901750997846076955, guid: 97396b320b85f8048bc230cfefceabcc, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -404
+      value: -248.2675
       objectReference: {fileID: 0}
     - target: {fileID: 2901750997846076955, guid: 97396b320b85f8048bc230cfefceabcc, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 275
+      value: 209.56708
       objectReference: {fileID: 0}
     - target: {fileID: 4929144535953180106, guid: 97396b320b85f8048bc230cfefceabcc, type: 3}
       propertyPath: field of view
@@ -7040,7 +7048,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6397765865151247324, guid: 97396b320b85f8048bc230cfefceabcc, type: 3}
       propertyPath: m_text
-      value: test position
+      value: test positiontest positiontest positiontest positiontest position
+      objectReference: {fileID: 0}
+    - target: {fileID: 6397765865151247324, guid: 97396b320b85f8048bc230cfefceabcc, type: 3}
+      propertyPath: m_fontSize
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 6397765865151247324, guid: 97396b320b85f8048bc230cfefceabcc, type: 3}
+      propertyPath: m_margin.z
+      value: -453.1389
+      objectReference: {fileID: 0}
+    - target: {fileID: 6397765865151247324, guid: 97396b320b85f8048bc230cfefceabcc, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 6397765865151247324, guid: 97396b320b85f8048bc230cfefceabcc, type: 3}
+      propertyPath: m_isRightToLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6397765865151247324, guid: 97396b320b85f8048bc230cfefceabcc, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6397765865151247324, guid: 97396b320b85f8048bc230cfefceabcc, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 4096
       objectReference: {fileID: 0}
     - target: {fileID: 6744071205626073067, guid: 97396b320b85f8048bc230cfefceabcc, type: 3}
       propertyPath: m_Enabled
