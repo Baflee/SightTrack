@@ -7000,7 +7000,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2901750997846076955, guid: 97396b320b85f8048bc230cfefceabcc, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 209.56708
+      value: 233
       objectReference: {fileID: 0}
     - target: {fileID: 4929144535953180106, guid: 97396b320b85f8048bc230cfefceabcc, type: 3}
       propertyPath: field of view
@@ -7052,7 +7052,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6397765865151247324, guid: 97396b320b85f8048bc230cfefceabcc, type: 3}
       propertyPath: m_fontSize
-      value: 55
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6397765865151247324, guid: 97396b320b85f8048bc230cfefceabcc, type: 3}
       propertyPath: m_margin.z
@@ -7060,7 +7060,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6397765865151247324, guid: 97396b320b85f8048bc230cfefceabcc, type: 3}
       propertyPath: m_fontSizeBase
-      value: 55
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6397765865151247324, guid: 97396b320b85f8048bc230cfefceabcc, type: 3}
       propertyPath: m_isRightToLeft
