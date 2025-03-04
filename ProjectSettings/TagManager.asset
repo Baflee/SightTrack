@@ -9,6 +9,7 @@ TagManager:
   - Crouch
   - Backward
   - Forward
+  - MovingPlatform
   layers:
   - Default
   - TransparentFX
