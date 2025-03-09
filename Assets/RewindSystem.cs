@@ -17,11 +17,13 @@ public class RewindSystem : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R)) // Appuie sur 'R' pour activer le rewind
+        // Clique molette enfoncé (mouse button 2)
+        if (Input.GetMouseButtonDown(2))
         {
             StartRewind();
         }
-        if (Input.GetKeyUp(KeyCode.R)) // Relâche 'R' pour arrêter
+        // Clique molette relâché
+        if (Input.GetMouseButtonUp(2))
         {
             StopRewind();
         }
@@ -79,4 +81,3 @@ public class RewindSystem : MonoBehaviour
         playerMovement.enabled = true; // Réactive le script de mouvement
     }
 }
-
