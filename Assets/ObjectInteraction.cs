@@ -102,7 +102,7 @@ public class ObjectInteraction : MonoBehaviour
         if (characterController != null)
         {
             isGrounded = characterController.isGrounded;
-            if (isGrounded && velocity.y < 0) velocity.y = -2f;
+            if (isGrounded) velocity.y = -2f;
             velocity.y += gravity * Time.deltaTime;
             characterController.Move(velocity * Time.deltaTime);
         }

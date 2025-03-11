@@ -517,7 +517,6 @@ GameObject:
   - component: {fileID: 1702051774770447420}
   - component: {fileID: 6907760811329081598}
   - component: {fileID: 6744071205626073067}
-  - component: {fileID: 820850756272908618}
   - component: {fileID: 3013541552202017015}
   m_Layer: 0
   m_Name: Player
@@ -568,29 +567,6 @@ MonoBehaviour:
   jumpForce: 5
   gravity: -9.81
   crouchHeight: 1
---- !u!136 &820850756272908618
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5965494855584507910}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!143 &3013541552202017015
 CharacterController:
   m_ObjectHideFlags: 0

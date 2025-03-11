@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 velocity;
     private bool isGrounded;
     private bool isCrouching;
+    private bool isJumping;
 
     public float crouchHeight = 1f;
     private float originalHeight;
@@ -41,12 +42,16 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         CheckGrounded();
-        if (isGrounded && velocity.y < 0) velocity.y = -2f;
+        if (isGrounded)
+        {
+            velocity.y = -2f;
+            isJumping = false;
+        }
 
         HandleMovement();
         HandleCrouch();
         HandleJump();
-        AutoStandUp(); // Vérifie si on peut se relever automatiquement
+        AutoStandUp();
 
         velocity.y += gravity * Time.deltaTime;
         characterController.Move(velocity * Time.deltaTime);
@@ -56,6 +61,8 @@ public class PlayerMovement : MonoBehaviour
     {
         isGrounded = characterController.isGrounded ||
                      Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, characterController.height / 2 + 0.2f);
+        
+        Debug.Log("isGrounded: " + isGrounded + " | isJumping: " + isJumping + " | Velocity Y: " + velocity.y);
     }
 
     void HandleMovement()
@@ -84,6 +91,8 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded && Input.GetKeyDown(KeyCode.Space) && !isCrouching)
         {
             velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
+            isJumping = true;
+            Debug.Log("Jump executed! Velocity Y: " + velocity.y);
         }
     }
 
@@ -120,7 +129,7 @@ public class PlayerMovement : MonoBehaviour
         characterController.height = targetHeight;
         characterController.center = new Vector3(0, targetHeight / 2, 0);
         cameraTransform.localPosition = new Vector3(0, targetCameraHeight, 0);
-        characterController.Move(Vector3.down * 0.1f);
+        characterController.Move(Vector3.down * 0.2f);
     }
 
     bool CanStandUp()
