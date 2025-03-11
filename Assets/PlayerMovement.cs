@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
         HandleMovement();
         HandleCrouch();
         HandleJump();
-        AutoStandUp();
+        AutoStandUp(); // Vérifie si on peut se relever automatiquement
 
         velocity.y += gravity * Time.deltaTime;
         characterController.Move(velocity * Time.deltaTime);
@@ -67,18 +67,15 @@ public class PlayerMovement : MonoBehaviour
 
     void HandleCrouch()
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.LeftControl) && !isCrouching)
         {
-            if (!isCrouching)
-            {
-                isCrouching = true;
-                ChangePlayerHeight(crouchHeight, crouchCameraHeight);
-            }
-            else if (CanStandUp())
-            {
-                isCrouching = false;
-                ChangePlayerHeight(originalHeight, standingCameraHeight);
-            }
+            isCrouching = true;
+            ChangePlayerHeight(crouchHeight, crouchCameraHeight);
+        }
+        else if (Input.GetKeyUp(KeyCode.LeftControl) && isCrouching && CanStandUp())
+        {
+            isCrouching = false;
+            ChangePlayerHeight(originalHeight, standingCameraHeight);
         }
     }
 
