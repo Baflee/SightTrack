@@ -10,6 +10,8 @@ TagManager:
   - Backward
   - Forward
   - MovingPlatform
+  - StableCrouch
+  - StableJump
   layers:
   - Default
   - TransparentFX
