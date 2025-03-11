@@ -1,22 +1,26 @@
 using UnityEngine;
+using System.Collections;
 
 public class ObjectInteraction : MonoBehaviour
 {
-    public Transform player;             // Assignation manuelle du joueur via l'inspecteur
-    public float raycastRange = 10f;     // Distance maximale du Raycast
-    public float minimumDistance = 2f;  // Distance minimale pour déclencher l'effet
-    public float jumpForce = 5f;         // Force du saut
+    public Transform player;
+    public float raycastRange = 10f;
+    public float minimumDistance = 2f;
+    public float jumpForce = 5f;
     public float forwardForce = 10f;
-    public float moveSpeed = 5f;         // Vitesse pour avancer/reculer
-    public float crouchSpeed = 2f;       // Vitesse de l'accroupissement
-    public float gravity = -9.81f;       // Force gravitationnelle
+    public float moveSpeed = 5f;
+    public float crouchSpeed = 2f;
+    public float gravity = -9.81f;
 
-    private CharacterController characterController; // Composant CharacterController
-    private Vector3 velocity;                        // Stocker la gravité et les mouvements verticaux
-    private bool isGrounded;                         // Détection si le joueur est au sol
+    private CharacterController characterController;
+    private Vector3 velocity;
+    private bool isGrounded;
+    private bool isCrouching;
+    private bool isStableCrouching;
+    private bool hasJumped;
 
-    public float jumpCooldown = 0.1f;  // Temps d'attente entre deux sauts
-    private float lastJumpTime = -1f;  // Heure du dernier saut
+    public float jumpCooldown = 0.1f;
+    private float lastJumpTime = -1f;
 
     private void Start()
     {
@@ -37,11 +41,7 @@ public class ObjectInteraction : MonoBehaviour
     private void Update()
     {
         CheckObject();
-
-        // Appliquer la gravité
         ApplyGravity();
-
-        // Fixer la rotation du joueur pour empêcher une rotation involontaire
         if (player != null)
         {
             player.rotation = Quaternion.Euler(0, player.rotation.eulerAngles.y, 0);
@@ -52,75 +52,57 @@ public class ObjectInteraction : MonoBehaviour
     {
         if (player == null) return;
 
-        // Perform a raycast from the camera's forward direction
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, raycastRange))
         {
             float distanceToObject = Vector3.Distance(player.position, hit.point);
+            if (distanceToObject < minimumDistance) return;
 
-            if (distanceToObject < minimumDistance)
-            {
-                Debug.Log("Trop proche de l'objet pour déclencher une action.");
-                return;
-            }
-
-            // Determine the action based on the object's tag
             string objectTag = hit.collider.tag;
-
             switch (objectTag)
             {
                 case "Jump":
                     StopGravity();
                     JumpTowards(hit.point);
                     break;
-
                 case "Backward":
                     MoveBackward();
                     break;
-
                 case "Forward":
                     MoveForward();
                     break;
-
                 case "Crouch":
+                    MoveForward();
                     Crouch();
                     break;
-
-                default:
-                    Debug.Log($"Aucune action définie pour l'objet avec le tag : {objectTag}");
+                case "StableCrouch":
+                    StableCrouch();
+                    break;
+                case "StableJump":
+                    StableJump();
                     break;
             }
         }
         else
         {
-            Debug.Log("Aucun objet détecté.");
+            if (isCrouching && CanStandUp())
+            {
+                StandUp();
+            }
+            if (isStableCrouching && CanStandUp())
+            {
+                StandUp();
+                isStableCrouching = false;
+            }
+            hasJumped = false;
         }
-    }   
+    }
 
     private void ApplyGravity()
     {
         if (characterController != null)
         {
             isGrounded = characterController.isGrounded;
-
-            if (isGrounded)
-            {
-                // Appliquez une friction manuelle pour éviter le glissement
-                velocity.x *= 0.8f; 
-                velocity.z *= 0.8f;
-
-                // Réinitialisez la vélocité si elle est très faible
-                if (velocity.magnitude < 0.1f)
-                {
-                    velocity.x = 0f;
-                    velocity.z = 0f;
-                }
-
-                if (velocity.y < 0)
-                {
-                    velocity.y = -2f; // Petite force pour rester au sol
-                }
-            }
-
+            if (isGrounded && velocity.y < 0) velocity.y = -2f;
             velocity.y += gravity * Time.deltaTime;
             characterController.Move(velocity * Time.deltaTime);
         }
@@ -128,68 +110,70 @@ public class ObjectInteraction : MonoBehaviour
 
     private void StopGravity()
     {
-        if (characterController != null)
-        {
-            // Réinitialiser la vélocité verticale à zéro pour arrêter la gravité
-            velocity.y = 0f;
-            Debug.Log("Gravité arrêtée temporairement.");
-        }
+        velocity.y = 0f;
     }
-
 
     private void JumpTowards(Vector3 targetPoint)
     {
-        if (characterController != null)
+        velocity = Vector3.zero;
+        Vector3 jumpDirection = (targetPoint - player.position).normalized;
+        velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
+        velocity.x = jumpDirection.x * forwardForce;
+        velocity.z = jumpDirection.z * forwardForce;
+        characterController.Move(velocity * Time.deltaTime);
+    }
+
+    private void StableJump()
+    {
+        if (!hasJumped && isGrounded)
         {
-            // Réinitialiser tout mouvement existant
-            velocity = Vector3.zero;
-            characterController.Move(Vector3.zero); // Stop immédiat du mouvement précédent
-
-            // Calculer la direction vers l'objet rouge
-            Vector3 jumpDirection = (targetPoint - player.position).normalized;
-
-            // Appliquer la force verticale pour le saut
             velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
-
-            // Appliquer la force horizontale vers la direction de l'objet
-            velocity.x = jumpDirection.x * forwardForce;
-            velocity.z = jumpDirection.z * forwardForce;
-
-            // Appliquer immédiatement le saut
-            characterController.Move(velocity * Time.deltaTime);
-
-            // Log pour vérifier le comportement
-            Debug.Log($"Nouveau saut vers : {targetPoint}. Vélocité actuelle : {velocity}");
+            hasJumped = true;
         }
     }
 
     private void MoveBackward()
     {
-        if (characterController != null)
-        {
-            Vector3 backwardDirection = -Camera.main.transform.forward;
-            characterController.Move(backwardDirection * moveSpeed * Time.deltaTime);
-            Debug.Log("Moving backward!");
-        }
+        characterController.Move(-Camera.main.transform.forward * moveSpeed * Time.deltaTime);
     }
 
     private void MoveForward()
     {
-        if (characterController != null)
-        {
-            Vector3 forwardDirection = Camera.main.transform.forward;
-            characterController.Move(forwardDirection * moveSpeed * Time.deltaTime);
-            Debug.Log("Moving forward!");
-        }
+        characterController.Move(Camera.main.transform.forward * moveSpeed * Time.deltaTime);
     }
 
     private void Crouch()
     {
-        if (characterController != null)
+        if (!isCrouching)
         {
-            Vector3 crouchDirection = Camera.main.transform.forward;
-            characterController.Move(crouchDirection * crouchSpeed * Time.deltaTime);
-            Debug.Log("Crouching!");
+            isCrouching = true;
+            characterController.height /= 2;
         }
+    }
+
+    private void StableCrouch()
+    {
+        if (!isStableCrouching)
+        {
+            isStableCrouching = true;
+            characterController.height /= 2;
+        }
+    }
+
+    private void StandUp()
+    {
+        isCrouching = false;
+        isStableCrouching = false;
+        characterController.height *= 2;
+    }
+
+    private bool CanStandUp()
+    {
+        float checkHeight = characterController.height * 2 - characterController.height;
+        Vector3 rayOrigin = player.position + Vector3.up * characterController.height;
+        float rayDistance = checkHeight;
+
+        bool obstacleAbove = Physics.Raycast(rayOrigin, Vector3.up, rayDistance);
+        return !obstacleAbove;
     }
 }
