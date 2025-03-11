@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 78848570}
   m_Layer: 0
   m_Name: Fruit 1 (1)
-  m_TagString: MovingPlatform
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -406,6 +406,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: -1599826595754709761, guid: 0bd596f68c69e694ebdb5c0fbd9a179d, type: 3}
+    - {fileID: -1878694964897466697, guid: 0bd596f68c69e694ebdb5c0fbd9a179d, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0bd596f68c69e694ebdb5c0fbd9a179d, type: 3}
@@ -572,7 +573,7 @@ GameObject:
   - component: {fileID: 1916898967}
   m_Layer: 0
   m_Name: Fruit 1
-  m_TagString: Jump
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -695,7 +696,7 @@ GameObject:
   - component: {fileID: 2138518642}
   m_Layer: 0
   m_Name: Fruit 1 (2)
-  m_TagString: MovingPlatform
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -841,11 +842,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1702051774770447420, guid: 97396b320b85f8048bc230cfefceabcc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -5.67
       objectReference: {fileID: 0}
     - target: {fileID: 1702051774770447420, guid: 97396b320b85f8048bc230cfefceabcc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.82
+      value: 3.3
       objectReference: {fileID: 0}
     - target: {fileID: 1702051774770447420, guid: 97396b320b85f8048bc230cfefceabcc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -918,6 +919,18 @@ PrefabInstance:
     - target: {fileID: 2901750997846076955, guid: 97396b320b85f8048bc230cfefceabcc, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 233
+      objectReference: {fileID: 0}
+    - target: {fileID: 3013541552202017015, guid: 97396b320b85f8048bc230cfefceabcc, type: 3}
+      propertyPath: m_Height
+      value: 1.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 3013541552202017015, guid: 97396b320b85f8048bc230cfefceabcc, type: 3}
+      propertyPath: m_StepOffset
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3013541552202017015, guid: 97396b320b85f8048bc230cfefceabcc, type: 3}
+      propertyPath: m_MinMoveDistance
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4929144535953180106, guid: 97396b320b85f8048bc230cfefceabcc, type: 3}
       propertyPath: field of view
