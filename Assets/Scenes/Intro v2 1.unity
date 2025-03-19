@@ -4080,7 +4080,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6397765865151247324, guid: 97396b320b85f8048bc230cfefceabcc, type: 3}
       propertyPath: m_text
-      value: test positiontest positiontest positiontest positiontest position
+      value: BJR
       objectReference: {fileID: 0}
     - target: {fileID: 6397765865151247324, guid: 97396b320b85f8048bc230cfefceabcc, type: 3}
       propertyPath: m_fontSize
