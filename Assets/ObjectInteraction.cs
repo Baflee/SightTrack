@@ -6,11 +6,7 @@ public class ObjectInteraction : MonoBehaviour
     public Transform player;
     public float raycastRange = 10f;
     public float minimumDistance = 2f;
-    public float jumpForce = 5f;
-    public float forwardForce = 10f;
-    public float moveSpeed = 5f;
-    public float crouchSpeed = 2f;
-    public float gravity = -9.81f;
+    public float teleportOffset = 1.5f; // Distance d’arrivée autour de l’objet Jump
 
     private CharacterController characterController;
     private Vector3 velocity;
@@ -18,6 +14,7 @@ public class ObjectInteraction : MonoBehaviour
     private bool isCrouching;
     private bool isStableCrouching;
     private bool hasJumped;
+    private bool hasStableJumped;
 
     public float jumpCooldown = 0.1f;
     private float lastJumpTime = -1f;
@@ -61,8 +58,7 @@ public class ObjectInteraction : MonoBehaviour
             switch (objectTag)
             {
                 case "Jump":
-                    StopGravity();
-                    JumpTowards(hit.point);
+                    TeleportToTarget(hit.point);
                     break;
                 case "Backward":
                     MoveBackward();
@@ -78,7 +74,10 @@ public class ObjectInteraction : MonoBehaviour
                     StableCrouch();
                     break;
                 case "StableJump":
-                    StableJump();
+                    if (!hasStableJumped)
+                    {
+                        StableJump();
+                    }
                     break;
             }
         }
@@ -93,7 +92,9 @@ public class ObjectInteraction : MonoBehaviour
                 StandUp();
                 isStableCrouching = false;
             }
+
             hasJumped = false;
+            hasStableJumped = false;
         }
     }
 
@@ -103,43 +104,37 @@ public class ObjectInteraction : MonoBehaviour
         {
             isGrounded = characterController.isGrounded;
             if (isGrounded) velocity.y = -2f;
-            velocity.y += gravity * Time.deltaTime;
+            velocity.y += -9.81f * Time.deltaTime;
             characterController.Move(velocity * Time.deltaTime);
         }
     }
 
-    private void StopGravity()
+    private void TeleportToTarget(Vector3 targetPoint)
     {
-        velocity.y = 0f;
-    }
+        Vector3 direction = (targetPoint - player.position).normalized;
+        Vector3 teleportPosition = targetPoint - (direction * teleportOffset); // Place le joueur juste à côté
 
-    private void JumpTowards(Vector3 targetPoint)
-    {
-        velocity = Vector3.zero;
-        Vector3 jumpDirection = (targetPoint - player.position).normalized;
-        velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
-        velocity.x = jumpDirection.x * forwardForce;
-        velocity.z = jumpDirection.z * forwardForce;
-        characterController.Move(velocity * Time.deltaTime);
+        characterController.enabled = false; // Désactive temporairement le CharacterController pour éviter les collisions
+        player.position = teleportPosition;
+        characterController.enabled = true; // Réactive le CharacterController
     }
 
     private void StableJump()
     {
-        if (!hasJumped && isGrounded)
-        {
-            velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
-            hasJumped = true;
-        }
+        float stableJumpForce = 8f; // Augmente la hauteur du saut
+        velocity.y = Mathf.Sqrt(stableJumpForce * -2f * -9.81f);
+        characterController.Move(velocity * Time.deltaTime);
+        hasStableJumped = true;
     }
 
     private void MoveBackward()
     {
-        characterController.Move(-Camera.main.transform.forward * moveSpeed * Time.deltaTime);
+        characterController.Move(-Camera.main.transform.forward * 5f * Time.deltaTime);
     }
 
     private void MoveForward()
     {
-        characterController.Move(Camera.main.transform.forward * moveSpeed * Time.deltaTime);
+        characterController.Move(Camera.main.transform.forward * 5f * Time.deltaTime);
     }
 
     private void Crouch()
