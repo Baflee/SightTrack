@@ -42,25 +42,30 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         CheckGrounded();
-        if (isGrounded)
-        {
-            velocity.y = -2f;
-            isJumping = false;
-        }
-
         HandleMovement();
         HandleCrouch();
         HandleJump();
         AutoStandUp();
 
-        velocity.y += gravity * Time.deltaTime;
+        if (!isGrounded)
+        {
+            velocity.y += gravity * Time.deltaTime;
+        }
+        
         characterController.Move(velocity * Time.deltaTime);
     }
 
     void CheckGrounded()
     {
+        bool wasGrounded = isGrounded;
         isGrounded = characterController.isGrounded ||
                      Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, characterController.height / 2 + 0.2f);
+        
+        if (isGrounded && !wasGrounded)
+        {
+            isJumping = false;
+            velocity.y = -2f;
+        }
         
         Debug.Log("isGrounded: " + isGrounded + " | isJumping: " + isJumping + " | Velocity Y: " + velocity.y);
     }

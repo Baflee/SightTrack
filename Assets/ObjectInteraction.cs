@@ -94,6 +94,8 @@ public class ObjectInteraction : MonoBehaviour
                 isStableCrouching = false;
             }
             hasJumped = false;
+            velocity.x = 0f;
+            velocity.z = 0f;
         }
     }
 
@@ -121,6 +123,15 @@ public class ObjectInteraction : MonoBehaviour
         velocity.x = jumpDirection.x * forwardForce;
         velocity.z = jumpDirection.z * forwardForce;
         characterController.Move(velocity * Time.deltaTime);
+        
+        StartCoroutine(ResetVelocityAfterJump());
+    }
+    
+    private IEnumerator ResetVelocityAfterJump()
+    {
+        yield return new WaitForSeconds(0.5f);
+        velocity.x = 0f;
+        velocity.z = 0f;
     }
 
     private void StableJump()
