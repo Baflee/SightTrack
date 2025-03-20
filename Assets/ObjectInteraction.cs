@@ -1,5 +1,9 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.UI;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class ObjectInteraction : MonoBehaviour
 {
@@ -18,9 +22,17 @@ public class ObjectInteraction : MonoBehaviour
     private bool isCrouching;
     private bool isStableCrouching;
     private bool hasJumped;
-
+    
     public float jumpCooldown = 0.1f;
     private float lastJumpTime = -1f;
+
+    public Volume postProcessVolume;
+    private Vignette vignette;
+    private bool isTroubleVisionActive = false;
+
+    public Transform cameraTransform;
+    public float shakeIntensity = 0.1f;
+    public float shakeDuration = 0.5f;
 
     private void Start()
     {
@@ -35,6 +47,11 @@ public class ObjectInteraction : MonoBehaviour
         else
         {
             Debug.LogError("Aucun joueur assigné. Assignez le joueur manuellement dans l'inspecteur.");
+        }
+        
+        if (postProcessVolume != null)
+        {
+            postProcessVolume.profile.TryGet(out vignette);
         }
     }
 
@@ -80,22 +97,13 @@ public class ObjectInteraction : MonoBehaviour
                 case "StableJump":
                     StableJump();
                     break;
+                case "TroubleVision":
+                    if (!isTroubleVisionActive)
+                    {
+                        StartCoroutine(TroubleVisionEffect());
+                    }
+                    break;
             }
-        }
-        else
-        {
-            if (isCrouching && CanStandUp())
-            {
-                StandUp();
-            }
-            if (isStableCrouching && CanStandUp())
-            {
-                StandUp();
-                isStableCrouching = false;
-            }
-            hasJumped = false;
-            velocity.x = 0f;
-            velocity.z = 0f;
         }
     }
 
@@ -109,12 +117,12 @@ public class ObjectInteraction : MonoBehaviour
             characterController.Move(velocity * Time.deltaTime);
         }
     }
-
+    
     private void StopGravity()
     {
         velocity.y = 0f;
     }
-
+    
     private void JumpTowards(Vector3 targetPoint)
     {
         velocity = Vector3.zero;
@@ -123,34 +131,16 @@ public class ObjectInteraction : MonoBehaviour
         velocity.x = jumpDirection.x * forwardForce;
         velocity.z = jumpDirection.z * forwardForce;
         characterController.Move(velocity * Time.deltaTime);
-        
-        StartCoroutine(ResetVelocityAfterJump());
     }
     
-    private IEnumerator ResetVelocityAfterJump()
-    {
-        yield return new WaitForSeconds(0.5f);
-        velocity.x = 0f;
-        velocity.z = 0f;
-    }
-
-    private void StableJump()
-    {
-        if (!hasJumped && isGrounded)
-        {
-            velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
-            hasJumped = true;
-        }
-    }
-
     private void MoveBackward()
     {
-        characterController.Move(-Camera.main.transform.forward * moveSpeed * Time.deltaTime);
+        characterController.Move(-player.forward * moveSpeed * Time.deltaTime);
     }
 
     private void MoveForward()
     {
-        characterController.Move(Camera.main.transform.forward * moveSpeed * Time.deltaTime);
+        characterController.Move(player.forward * moveSpeed * Time.deltaTime);
     }
 
     private void Crouch()
@@ -171,20 +161,40 @@ public class ObjectInteraction : MonoBehaviour
         }
     }
 
-    private void StandUp()
+    private void StableJump()
     {
-        isCrouching = false;
-        isStableCrouching = false;
-        characterController.height *= 2;
+        if (!hasJumped && isGrounded)
+        {
+            velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
+            hasJumped = true;
+        }
     }
 
-    private bool CanStandUp()
+    private IEnumerator TroubleVisionEffect()
     {
-        float checkHeight = characterController.height * 2 - characterController.height;
-        Vector3 rayOrigin = player.position + Vector3.up * characterController.height;
-        float rayDistance = checkHeight;
-
-        bool obstacleAbove = Physics.Raycast(rayOrigin, Vector3.up, rayDistance);
-        return !obstacleAbove;
+        isTroubleVisionActive = true;
+        float elapsedTime = 0f;
+        float duration = shakeDuration;
+        
+        while (elapsedTime < duration)
+        {
+            float offsetX = Random.Range(-shakeIntensity, shakeIntensity);
+            float offsetY = Random.Range(-shakeIntensity, shakeIntensity);
+            cameraTransform.position += new Vector3(offsetX, offsetY, 0);
+            
+            if (vignette != null)
+            {
+                vignette.intensity.value = Mathf.Lerp(0.2f, 0.5f, elapsedTime / duration);
+            }
+            
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        
+        if (vignette != null)
+        {
+            vignette.intensity.value = 0.2f;
+        }
+        isTroubleVisionActive = false;
     }
 }

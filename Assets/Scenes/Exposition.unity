@@ -2540,6 +2540,10 @@ MonoBehaviour:
   crouchSpeed: 2
   gravity: -9.81
   jumpCooldown: 0.1
+  postProcessVolume: {fileID: 0}
+  cameraTransform: {fileID: 0}
+  shakeIntensity: 0.1
+  shakeDuration: 0.5
 --- !u!114 &1447704212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4166,7 +4170,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1702051774770447420, guid: 97396b320b85f8048bc230cfefceabcc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -41
+      value: -133.24
       objectReference: {fileID: 0}
     - target: {fileID: 1702051774770447420, guid: 97396b320b85f8048bc230cfefceabcc, type: 3}
       propertyPath: m_LocalPosition.y
