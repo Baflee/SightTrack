@@ -12,6 +12,7 @@ TagManager:
   - MovingPlatform
   - StableCrouch
   - StableJump
+  - PastEcho
   layers:
   - Default
   - TransparentFX
