@@ -138,7 +138,7 @@ public class ObjectInteraction : MonoBehaviour
 
     private void StableJump()
     {
-        float stableJumpForce = 8f;
+        float stableJumpForce = 10f;
         velocity.y = Mathf.Sqrt(stableJumpForce * -2f * -9.81f);
         characterController.Move(velocity * Time.deltaTime);
         hasStableJumped = true;
@@ -146,12 +146,12 @@ public class ObjectInteraction : MonoBehaviour
 
     private void MoveBackward()
     {
-        characterController.Move(-Camera.main.transform.forward * 5f * Time.deltaTime);
+        characterController.Move(-Camera.main.transform.forward * 15f * Time.deltaTime);
     }
 
     private void MoveForward()
     {
-        characterController.Move(Camera.main.transform.forward * 30f * Time.deltaTime);
+        characterController.Move(Camera.main.transform.forward * 6f * Time.deltaTime);
     }
 
     private void Crouch()
