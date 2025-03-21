@@ -43,7 +43,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 0
-  m_Color: {r: 0.15294118, g: 0.49803925, b: 0.9960785, a: 1}
+  m_Color: {r: 0.9960785, g: 0.16078432, b: 0.5254902, a: 1}
   m_Intensity: 100
   m_Range: 39.3574
   m_SpotAngle: 109.48543
@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 2321991657078559433}
   - component: {fileID: 1737298132631894085}
   m_Layer: 0
-  m_Name: Forward
+  m_Name: Jump
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -246,7 +246,7 @@ GameObject:
   - component: {fileID: 1708366958107166202}
   m_Layer: 0
   m_Name: Screen
-  m_TagString: Forward
+  m_TagString: Jump
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -297,7 +297,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 52062d04d5010cd4589b12cbf0599199, type: 2}
+  - {fileID: 2100000, guid: 3650d91936880f44ba0e1ddfd5102c7f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

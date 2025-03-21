@@ -20,14 +20,15 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Bois
+  m_Name: Jaune
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 2100000, guid: 098dc1c1bcc30e841882c7d4c9474378, type: 2}
   m_ModifiedSerializedProperties: 2
   m_ValidKeywords:
+  - _EMISSION
   - _SPECULAR_SETUP
   m_InvalidKeywords: []
-  m_LightmapFlags: 4
+  m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -42,8 +43,8 @@ Material:
     m_Ints: []
     m_Floats: []
     m_Colors:
-    - _BaseColor: {r: 0.3679245, g: 0.1555033, b: 0, a: 1}
-    - _Color: {r: 0.36792448, g: 0.15550327, b: 0, a: 1}
-    - _EmissionColor: {r: 42.224255, g: 0.584383, b: 0, a: 1}
+    - _BaseColor: {r: 0.98290217, g: 1, b: 0, a: 1}
+    - _Color: {r: 0.9829021, g: 1, b: 0, a: 1}
+    - _EmissionColor: {r: 46.790123, g: 48.502926, b: 0, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
