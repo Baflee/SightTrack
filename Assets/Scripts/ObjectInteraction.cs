@@ -7,8 +7,8 @@ public class ObjectInteraction : MonoBehaviour
     public Transform player;
     public float raycastRange = 10f;
     public float minimumDistance = 2f;
-    public float teleportOffset = 1.5f; // Distance d’arrivée autour de l’objet Jump
-    public int rewindFrames = 1000; // Nombre de frames à remonter
+    public float teleportOffset = 1.5f;
+    public int rewindFrames = 1000;
 
     private CharacterController characterController;
     private Vector3 velocity;
@@ -18,6 +18,7 @@ public class ObjectInteraction : MonoBehaviour
     private bool hasJumped;
     private bool hasStableJumped;
     private bool isRewinding;
+    private Coroutine standUpCoroutine;
 
     private List<Vector3> positionHistory = new List<Vector3>();
     private List<Quaternion> rotationHistory = new List<Quaternion>();
@@ -68,7 +69,7 @@ public class ObjectInteraction : MonoBehaviour
             if (distanceToObject < minimumDistance) return;
 
             string objectTag = hit.collider.tag;
-            if (!isRewinding) // Empêche toute autre interaction pendant le rewind
+            if (!isRewinding)
             {
                 switch (objectTag)
                 {
@@ -84,9 +85,11 @@ public class ObjectInteraction : MonoBehaviour
                     case "Crouch":
                         MoveForward();
                         Crouch();
+                        ResetStandUpTimer();
                         break;
                     case "StableCrouch":
                         StableCrouch();
+                        ResetStandUpTimer();
                         break;
                     case "StableJump":
                         if (!hasStableJumped)
@@ -101,6 +104,13 @@ public class ObjectInteraction : MonoBehaviour
                         }
                         break;
                 }
+            }
+        }
+        else
+        {
+            if ((isCrouching || isStableCrouching) && standUpCoroutine == null)
+            {
+                standUpCoroutine = StartCoroutine(StandUpAfterDelay());
             }
         }
     }
@@ -167,26 +177,32 @@ public class ObjectInteraction : MonoBehaviour
         isCrouching = false;
         isStableCrouching = false;
         characterController.height *= 2;
+        standUpCoroutine = null;
     }
 
-    private bool CanStandUp()
+    private void ResetStandUpTimer()
     {
-        float checkHeight = characterController.height * 2 - characterController.height;
-        Vector3 rayOrigin = player.position + Vector3.up * characterController.height;
-        float rayDistance = checkHeight;
+        if (standUpCoroutine != null)
+        {
+            StopCoroutine(standUpCoroutine);
+            standUpCoroutine = null;
+        }
+        standUpCoroutine = StartCoroutine(StandUpAfterDelay());
+    }
 
-        bool obstacleAbove = Physics.Raycast(rayOrigin, Vector3.up, rayDistance);
-        return !obstacleAbove;
+    private IEnumerator StandUpAfterDelay()
+    {
+        yield return new WaitForSeconds(5f);
+        StandUp();
     }
 
     private void RecordHistory()
     {
-        if (positionHistory.Count > 2000) // Augmenté pour éviter une surcharge mémoire
+        if (positionHistory.Count > 2000)
         {
             positionHistory.RemoveAt(0);
             rotationHistory.RemoveAt(0);
         }
-
         positionHistory.Add(player.position);
         rotationHistory.Add(player.rotation);
     }
@@ -194,27 +210,21 @@ public class ObjectInteraction : MonoBehaviour
     private IEnumerator RewindTime()
     {
         isRewinding = true;
-        characterController.enabled = false; // Désactiver le CharacterController pendant le rewind
-
+        characterController.enabled = false;
         int framesRewound = 0;
-
         while (framesRewound < rewindFrames && positionHistory.Count > 1)
         {
-            player.position = positionHistory[positionHistory.Count - 1];
-            player.rotation = rotationHistory[rotationHistory.Count - 1];
-
+            player.position = positionHistory[^1];
+            player.rotation = rotationHistory[^1];
             positionHistory.RemoveAt(positionHistory.Count - 1);
             rotationHistory.RemoveAt(rotationHistory.Count - 1);
-
             framesRewound++;
-
-            if (framesRewound % 10 == 0) // Petite pause toutes les 10 frames pour fluidifier l'effet
+            if (framesRewound % 10 == 0)
             {
                 yield return null;
             }
         }
-
-        characterController.enabled = true; // Réactiver le CharacterController après le rewind
+        characterController.enabled = true;
         isRewinding = false;
     }
 }
