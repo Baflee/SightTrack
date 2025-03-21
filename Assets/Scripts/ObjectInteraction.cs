@@ -151,7 +151,7 @@ public class ObjectInteraction : MonoBehaviour
 
     private void MoveForward()
     {
-        characterController.Move(Camera.main.transform.forward * 5f * Time.deltaTime);
+        characterController.Move(Camera.main.transform.forward * 30f * Time.deltaTime);
     }
 
     private void Crouch()
