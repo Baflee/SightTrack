@@ -4,25 +4,60 @@ using System.Collections.Generic;
 
 public class ObjectInteraction : MonoBehaviour
 {
+    [Header("Références")]
     public Transform player;
+
+    [Header("Raycast & Interactions")]
     public float raycastRange = 10f;
     public float minimumDistance = 2f;
     public float teleportOffset = 1.5f;
     public int rewindFrames = 1000;
 
+    [Header("Lissage Mouvement")]
+    [SerializeField] private float maxForwardSpeed = 6f;
+    [SerializeField] private float maxBackwardSpeed = 15f;
+    [SerializeField] private float accel = 14f;
+    [SerializeField] private float decel = 18f;
+
+    [Header("Téléportation Lissée")]
+    [SerializeField] private float teleportDuration = 0.15f; // tween court
+
+    [Header("Rewind Fluide")]
+    [SerializeField] private float rewindPlaybackSpeed = 60f; // segments/seconde
+
+    [Header("Saut Stable")]
+    [SerializeField] private float stableJumpForce = 10f;
+    [SerializeField] private float jumpBuffer = 0.08f; // buffer de 80 ms
+
     private CharacterController characterController;
     private Transform camTransform;
-    private Vector3 velocity;
+
+    // Physique/move
+    private Vector3 velocity; // uniquement Y ici; l’horizontal est géré par currentSpeed
     private bool isGrounded;
+
+    // États
     private bool isCrouching;
     private bool isStableCrouching;
     private bool hasStableJumped;
     private bool isRewinding;
+
+    // Lissage vitesses
+    private float currentSpeed = 0f;   // m/s (négatif = recul)
+    private float targetSpeed = 0f;    // m/s
+
+    // Coroutines
     private Coroutine standUpCoroutine;
+
+    // Crouch data
     private float originalHeight;
 
+    // Historique pour rewind
     private readonly List<Vector3> positionHistory = new List<Vector3>();
     private readonly List<Quaternion> rotationHistory = new List<Quaternion>();
+
+    // Jump buffer
+    private float lastStableJumpRequest = -999f;
 
     private void Start()
     {
@@ -60,10 +95,20 @@ public class ObjectInteraction : MonoBehaviour
         if (!isRewinding)
         {
             RecordHistory();
-            ApplyGravity();
+            ApplyGravity(); // ne fait qu'updater velocity.y (pas de Move ici)
         }
 
-        CheckObject();
+        CheckObject(); // met à jour targetSpeed + déclenche interactions
+
+        // Lissage accélération/décélération horizontale
+        float rate = Mathf.Abs(targetSpeed) > Mathf.Abs(currentSpeed) ? accel : decel;
+        currentSpeed = Mathf.MoveTowards(currentSpeed, targetSpeed, rate * Time.deltaTime);
+
+        // Déplacement combiné (horizontal lissé + gravité)
+        Vector3 fwd = PlanarForward();
+        Vector3 horizontal = fwd * currentSpeed;
+        Vector3 vertical = new Vector3(0f, velocity.y, 0f);
+        characterController.Move((horizontal + vertical) * Time.deltaTime);
 
         // Forcer le joueur à rester droit (pitch/roll = 0), on conserve l'angle Y.
         player.rotation = Quaternion.Euler(0f, player.rotation.eulerAngles.y, 0f);
@@ -73,6 +118,9 @@ public class ObjectInteraction : MonoBehaviour
     {
         if (player == null || isRewinding || camTransform == null) return;
 
+        // Par défaut, si aucun tag, on vise l'arrêt
+        targetSpeed = 0f;
+
         if (Physics.Raycast(camTransform.position, camTransform.forward, out RaycastHit hit, raycastRange))
         {
             float distanceToObject = Vector3.Distance(player.position, hit.point);
@@ -80,42 +128,41 @@ public class ObjectInteraction : MonoBehaviour
 
             if (!isRewinding)
             {
-                // Utiliser CompareTag pour plus de robustesse/perf
                 if (hit.collider.CompareTag("Jump"))
                 {
-                    TeleportToTarget(hit.point);
+                    TeleportToTargetSmooth(hit.point);
                 }
                 else if (hit.collider.CompareTag("Backward"))
                 {
-                    MoveBackward();
+                    targetSpeed = -maxBackwardSpeed;
                 }
                 else if (hit.collider.CompareTag("Forward"))
                 {
-                    MoveForward();
+                    targetSpeed = maxForwardSpeed;
                 }
                 else if (hit.collider.CompareTag("Crouch"))
                 {
-                    MoveForward();
-                    Crouch();
+                    targetSpeed = maxForwardSpeed * 0.7f; // optionnel, garde un petit glide
+                    Crouch(); // <-- instantané comme avant
                     ResetStandUpTimer();
                 }
                 else if (hit.collider.CompareTag("StableCrouch"))
                 {
-                    StableCrouch();
+                    StableCrouch(); // <-- instantané comme avant
                     ResetStandUpTimer();
                 }
                 else if (hit.collider.CompareTag("StableJump"))
                 {
                     if (!hasStableJumped)
                     {
-                        StableJump();
+                        StableJump(); // déclenche avec un mini buffer
                     }
                 }
                 else if (hit.collider.CompareTag("PastEcho"))
                 {
                     if (positionHistory.Count > rewindFrames)
                     {
-                        StartCoroutine(RewindTime());
+                        StartCoroutine(RewindTimeSmooth());
                     }
                 }
             }
@@ -142,36 +189,57 @@ public class ObjectInteraction : MonoBehaviour
         }
 
         velocity.y += Physics.gravity.y * Time.deltaTime;
-        characterController.Move(velocity * Time.deltaTime);
+        // NOTE: on n'appelle plus Move ici; Move est fait dans Update avec l'horizontal
     }
 
-    private void TeleportToTarget(Vector3 targetPoint)
+    // --- Téléportation lissée (tween court) ---
+    private void TeleportToTargetSmooth(Vector3 targetPoint)
     {
         if (player == null || characterController == null) return;
 
         Vector3 direction = (targetPoint - player.position).normalized;
-        Vector3 teleportPosition = targetPoint - (direction * teleportOffset);
-
-        characterController.enabled = false;
-        player.position = teleportPosition;
-        characterController.enabled = true;
-
-        // Éviter les à-coups après téléportation
-        velocity = Vector3.zero;
-
-        // Petit move nul pour forcer l’update des collisions
-        characterController.Move(Vector3.zero);
+        Vector3 targetPos = targetPoint - (direction * teleportOffset);
+        StartCoroutine(TeleportTween(targetPos));
     }
 
+    private IEnumerator TeleportTween(Vector3 targetPos)
+    {
+        characterController.enabled = false;
+        Vector3 start = player.position;
+        float t = 0f;
+
+        // annule la vélocité verticale pour éviter un kick post-TP
+        velocity = Vector3.zero;
+
+        while (t < teleportDuration)
+        {
+            t += Time.deltaTime;
+            float k = Mathf.SmoothStep(0f, 1f, t / teleportDuration);
+            player.position = Vector3.Lerp(start, targetPos, k);
+            yield return null;
+        }
+        player.position = targetPos;
+
+        characterController.enabled = true;
+        characterController.Move(Vector3.zero); // force l’update des collisions
+    }
+
+    // --- Saut stable avec mini buffer (plus tolérant et moins "sec") ---
     private void StableJump()
     {
-        if (characterController == null) return;
+        lastStableJumpRequest = Time.time;
+        StartCoroutine(TryDoStableJump());
+    }
 
-        // Interprétation: stableJumpForce ~ "hauteur" ou facteur d'impulsion
-        float stableJumpForce = 10f;
-        velocity.y = Mathf.Sqrt(2f * stableJumpForce * -Physics.gravity.y);
-        characterController.Move(velocity * Time.deltaTime);
-        hasStableJumped = true;
+    private IEnumerator TryDoStableJump()
+    {
+        // attends 1 frame pour laisser isGrounded se mettre à jour proprement
+        yield return null;
+        if (characterController.isGrounded && Time.time - lastStableJumpRequest <= jumpBuffer)
+        {
+            velocity.y = Mathf.Sqrt(2f * stableJumpForce * -Physics.gravity.y);
+            hasStableJumped = true;
+        }
     }
 
     private Vector3 PlanarForward()
@@ -184,22 +252,7 @@ public class ObjectInteraction : MonoBehaviour
         return fwd / mag;
     }
 
-    private void MoveBackward()
-    {
-        if (characterController == null) return;
-        Vector3 fwd = PlanarForward();
-        if (fwd == Vector3.zero) return;
-        characterController.Move(-fwd * 15f * Time.deltaTime);
-    }
-
-    private void MoveForward()
-    {
-        if (characterController == null) return;
-        Vector3 fwd = PlanarForward();
-        if (fwd == Vector3.zero) return;
-        characterController.Move(fwd * 6f * Time.deltaTime);
-    }
-
+    // --- Crouch instantané (comme l’original) ---
     private void Crouch()
     {
         if (characterController == null) return;
@@ -249,6 +302,7 @@ public class ObjectInteraction : MonoBehaviour
         StandUp();
     }
 
+    // --- Historique positions/rotations pour rewind ---
     private void RecordHistory()
     {
         if (player == null) return;
@@ -262,27 +316,40 @@ public class ObjectInteraction : MonoBehaviour
         rotationHistory.Add(player.rotation);
     }
 
-    private IEnumerator RewindTime()
+    // --- Rewind fluide (interpolation entre points) ---
+    private IEnumerator RewindTimeSmooth()
     {
         isRewinding = true;
 
         if (characterController != null)
             characterController.enabled = false;
 
-        int framesRewound = 0;
-        while (framesRewound < rewindFrames && positionHistory.Count > 1)
+        int steps = Mathf.Min(rewindFrames, positionHistory.Count - 1);
+        int idx = positionHistory.Count - 1;
+
+        while (steps > 0 && idx > 0)
         {
-            player.position = positionHistory[positionHistory.Count - 1];
-            player.rotation = rotationHistory[rotationHistory.Count - 1];
+            Vector3 a = positionHistory[idx];
+            Vector3 b = positionHistory[idx - 1];
+            Quaternion qa = rotationHistory[idx];
+            Quaternion qb = rotationHistory[idx - 1];
 
-            positionHistory.RemoveAt(positionHistory.Count - 1);
-            rotationHistory.RemoveAt(rotationHistory.Count - 1);
-
-            framesRewound++;
-            if (framesRewound % 10 == 0)
+            float t = 0f;
+            float segTime = 1f / rewindPlaybackSpeed; // durée par “segment” consommé
+            while (t < segTime)
             {
+                t += Time.deltaTime;
+                float k = Mathf.Clamp01(t / segTime);
+                player.position = Vector3.Lerp(a, b, k);
+                player.rotation = Quaternion.Slerp(qa, qb, k);
                 yield return null;
             }
+
+            // On consomme ce point
+            positionHistory.RemoveAt(idx);
+            rotationHistory.RemoveAt(idx);
+            idx--;
+            steps--;
         }
 
         if (characterController != null)
